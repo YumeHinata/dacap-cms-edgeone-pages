@@ -15,6 +15,6 @@
 将本仓库中的`edge-functions`目录置于项目的**根目录**（请注意：此处指项目本身的顶层目录，而非输出目录的顶层）。
 ### 4.完成部署
 根据你的实际情况调整decapCMS的config.yml文件内容。
-友情提示：截止发稿前，Edgeone Pages在访问yml文件时不会以预期中的`text/yaml`格式加载，请在`admin.html`中修改为可以正常加载的github Raw或Jsdelivr的URL，例如：
+**友情提示：** 截止发稿前，Edgeone Pages在访问yml文件时不会以预期中的`text/yaml`格式加载，请在`admin.html`中修改为可以正常加载的github Raw或Jsdelivr的URL，例如：
 `<link href="https://raw.githubusercontent.com/YumeHinata/AstroBlog/main/public/admin/config.yml" type="text/yaml" rel="cms-config-url" />`
 发布站点并通过Tencent Edgeone Pages构建后，访问您站点的 /admin/ 路径，即可看到 “使用 GitHub 登录” 按钮。点击该按钮将通过 GitHub 身份验证并启动 CMS。
