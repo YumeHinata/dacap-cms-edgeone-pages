@@ -8,11 +8,15 @@ export async function onRequest(context) {
         data,
     } = context;
     const client_id = context.env.GITHUB_CLIENT_ID;
+    const siteDomain = context.env.SITE_DOMAIN;
     try {
         const url = new URL(request.url);
+        const origin = siteDomain
+            ? new URL(siteDomain.includes('://') ? siteDomain : `https://${siteDomain}`).origin
+            : url.origin;
         const redirectUrl = new URL('https://github.com/login/oauth/authorize');
         redirectUrl.searchParams.set('client_id', client_id);
-        redirectUrl.searchParams.set('redirect_uri', url.origin + '/callback');
+        redirectUrl.searchParams.set('redirect_uri', origin + '/callback');
         redirectUrl.searchParams.set('scope', 'repo user');
         const stateArray = new Uint8Array(12);
         crypto.getRandomValues(stateArray);

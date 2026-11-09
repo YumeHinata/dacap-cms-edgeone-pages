@@ -7,12 +7,14 @@
 前往 Settings → Developer Settings，选择 OAuth Apps 并创建新应用。应用名称可自定义，主页 URL 应设为您的站点地址（例如 [https://example.com](https://example.com/)）。其中 **授权回调 URL（Authorization callback URL）** 至关重要——您亦可将其设为**主页URL**+**backend.auth_endpoint**。例如我的`auth_endpoint`为`auth`，那最后的URL应该为[https://example.com/auth](https://example.com/auth)。
 
 创建完成后，GitHub 将提供 Client ID，此时您可同时生成 Client Secret。后续步骤将同时需要这两项信息。
-### 2.将 Client ID 与 Secret 添加至 Cloudflare 项目
-在Edgeone pages项目中，进入 Settings → Environment variables，添加两个环境变量：
+### 2.将 Client ID 与 Secret 添加至 EdgeOne 项目
+在Edgeone pages项目中，进入 Settings → Environment variables，添加环境变量：
 
 `GITHUB_CLIENT_ID`：填入上文获取的 Client ID
 
 `GITHUB_CLIENT_SECRET`：填入生成的 Client Secret
+
+`SITE_DOMAIN`（可选）：博客实际对外的域名（例如 `blog.example.com`，也可带协议如 `https://blog.example.com`）。设置后，GitHub OAuth 回调地址将固定为 `https://<SITE_DOMAIN>/callback`，不再读取 EdgeOne 平台绑定的域名；不设置则回退为当前请求的平台域名。请确保 GitHub OAuth 应用的授权回调 URL 与此地址一致。
 ### 3.将文件添加至项目
 将本仓库中的`edge-functions`目录置于项目的**根目录**（请注意：此处指项目本身的顶层目录，而非输出目录的顶层）。
 ### 4.完成部署
